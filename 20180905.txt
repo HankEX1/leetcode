@@ -1,0 +1,65 @@
+leetcode_title:"Second Highest Salary"
+Write a SQL query to get the second highest salary from the Employee table.
+
++----+--------+
+| Id | Salary |
++----+--------+
+| 1  | 100    |
+| 2  | 200    |
+| 3  | 300    |
++----+--------+
+
+For example, given the above Employee table, the query should return 200 as the second highest salary. If there is no second highest salary, then the query should return null.
+
++---------------------+
+| SecondHighestSalary |
++---------------------+
+| 200                 |
++---------------------+
+
+Solution:
+Select ifnull((Select distinct salary from employee order by salary desc limit 1 offset 1),null) as SecondHighestSalary
+     
+     
+     #Select IFNULL(x,y)
+     #數值不為null則回傳x
+     #數值為null時,回傳y.
+     
+     
+     #Select IF(x,y,z)
+     #x為1回傳y,為0回傳z
+     #Select if(4>5,"1","0") as new;
+     
+     
+     
+     
+     #Select case column when x then y when q then r end as new_column_name from tables
+     #當column值為x則回傳y,column值為q則回傳r
+     #Select id,case salary when 100 then 1 when "200" then "2" else "pikachu" end as test from employee;
+     #回傳"headers":["id","test"],"values":[[1,"1"],[2,"2"],[3,"pikachu"]
+
+
+
+
+
+
+
+
+
+
+
+     #回傳"headers":["id","test"],"values":[[1,"1"],[2,"2"],[3,"pikachu"]
+
+
+
+
+A
+A
+A
+A
+A
+A
+B
+B
+B
+     #回傳"headers":["id","test"],"values":[[1,"1"],[2,"2"],[3,"pikachu"]
