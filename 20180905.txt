@@ -38,28 +38,3 @@ Select ifnull((Select distinct salary from employee order by salary desc limit 1
      #Select id,case salary when 100 then 1 when "200" then "2" else "pikachu" end as test from employee;
      #回傳"headers":["id","test"],"values":[[1,"1"],[2,"2"],[3,"pikachu"]
 
-
-
-
-
-
-
-
-
-
-
-     #回傳"headers":["id","test"],"values":[[1,"1"],[2,"2"],[3,"pikachu"]
-
-
-
-
-A
-A
-A
-A
-A
-A
-B
-B
-B
-     #回傳"headers":["id","test"],"values":[[1,"1"],[2,"2"],[3,"pikachu"]
