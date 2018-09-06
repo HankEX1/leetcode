@@ -1,0 +1,53 @@
+leetcode_title:"Combine Two Tables"
+
+# Write your MySQL query statement below
+Select FirstName,LastName,City,State from Person a
+Left Join Address b
+On a.PersonId=b.PersonId;
+
+leetcode_title:"Second Highest Salary"
+
+# Write your MySQL query statement below
+
+Select IFNull((Select distinct Salary from Employee Order by Salary desc Limit 1 offset 1),null) as SecondHighestSalary;
+
+leetcode_title:"Consecutive Numbers"
+
+# Write your MySQL query statement below
+
+Select distinct a.Num ConsecutiveNums from logs a,logs b,logs c
+where a.id=b.id-1 And b.id=c.id-1 And a.Num=b.Num And b.Num=c.Num;
+
+leetcode_title:"Employees Earning More Than Their Managers"
+
+# Write your MySQL query statement below
+
+Select a.Name Employee from Employee a,Employee b
+where a.ManagerId=b.Id And a.Salary > b.Salary;
+
+leetcode_title:"Duplicate Emails"
+
+# Write your MySQL query statement below
+
+Select distinct Email from Person
+Group by Email
+Having count(Email)>1;
+
+leetcode_title:"Customers Who Never Order"
+
+# Write your MySQL query statement below
+
+Select Name Customers from Customers a
+Left join Orders b
+on a.id=b.Customerid
+where Customerid is null;
+
+leetcode_title:"Department Highest Salary"
+
+# Write your MySQL query statement below
+
+Select Department.Name Department,Employee.Name Employee,Salary Salary from Employee
+Join Department
+On Employee.DepartmentId=Department.Id
+where (Employee.DepartmentId,Salary) In (Select DepartmentId,MAX(salary) from employee group by departmentId);
+
