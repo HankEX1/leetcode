@@ -31,7 +31,7 @@ Write a SQL query to find employees who have the highest salary in each of the d
 
 # Write your MySQL query statement below
 Select Department.Name Department ,Employee.Name Employee,Salary from Employee
-Left join Department
+join Department
 on Employee.DepartmentId=Department.Id
 Where (Employee.DepartmentId,Salary) In(Select DepartmentId,MAX(Salary) from Employee Group by DepartmentId);
 
