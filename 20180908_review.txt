@@ -1,0 +1,73 @@
+leetcode_title:"Combine Two Tables"
+# Write your MySQL query statement below
+
+Select FirstName,LastName,City,State from Person p
+Left join Address a
+on p.Personid=a.Personid;
+#True
+
+leetcode_title:"Second Highest Salary"
+
+# Write your MySQL query statement below
+
+1st:Select IFNull((Select Salary from Employee Order by Salary desc limit 1 offset 1),null) as SecondHighestSalary;
+#if salary all 100 is false
+2nd:Select IFNull((Select Salary from Employee Order by Salary desc limit 1 offset 1),null) as SecondHighestSalary;
+#True
+
+leetcode_title:"Consecutive Numbers"
+
+# Write your MySQL query statement below
+
+Select distinct l1.Num ConsecutiveNums from logs l1,logs l2,logs l3
+where l1.id=l2.id-1 and l2.id=l3.id-1 and l1.Num=l2.Num and l2.num=l3.Num;
+#True
+
+leetcode_title:"Employees Earning More Than Their Managers"
+
+# Write your MySQL query statement below
+
+Select e1.Name Employee from Employee e1,Employee e2
+where e1.ManagerId=e2.Id and e1.Salary > e2.Salary;
+#True
+
+leetcode_title:"Duplicate Emails"
+
+# Write your MySQL query statement below
+
+Select distinct p1.Email from Person p1,Person p2
+where p1.id>p2.id and p1.email=p2.email;
+#True
+
+leetcode_title:"Customers Who Never Order"
+
+# Write your MySQL query statement below
+
+Select c.name Customers from Customers c
+left join orders o
+on c.id=o.customerid
+where o.customerid is null;
+#True
+
+leetcode_title:"Department Highest Salary"
+
+# Write your MySQL query statement below
+
+Select d.name Department,e.name Employee,Salary from Employee e
+join department d
+on e.departmentid=d.id
+where (departmentid,Salary) in(Select departmentid,max(Salary) from employee group by departmentid);
+#True
+
+leetcode_title:"Department Top Three Salaries"
+
+# Write your MySQL query statement below
+
+Select d.name Department,e.name Employee,Salary from Employee e
+join department d
+on e.departmentid=d.id
+where 3> (select count(distinct salary) from employee e1
+         where e1.salary>e.salary and e.departmentid=e1.departmentid
+         )
+         order by Salary desc;
+#True
