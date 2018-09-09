@@ -1,0 +1,83 @@
+leetcode_title:"Delete Duplicate Emails"
+
+# Write your MySQL query statement below
+
+Delete p1 from person p1,person p2
+where p1.id>p2.id and p1.Email=p2.Email;
+#True
+
+leetcode_title:"Rising Temperature"
+
+# Write your MySQL query statement below
+
+Select w1.Id from weather w1,weather w2
+where datediff(w1.RecordDate,w2.RecordDate)=1 and w1.Temperature >w2.temperature;
+#True
+
+
+leetcode_title:"Big Countries"
+
+# Write your MySQL query statement below
+
+Select name,population,area from world
+where population >25000000 or area > 3000000;
+#True
+
+leetcode_title:"Classes More Than 5 Students"
+
+# Write your MySQL query statement below
+
+Select distinct class from courses c
+group by class
+having count(distinct student)>=5;
+#True
+
+
+leetcode_title:"Human Traffic of Stadium"
+
+# Write your MySQL query statement below
+
+Select distinct s1.id,s1.date,s1.people from stadium s1,stadium s2,stadium s3
+where s1.people >=100 and s2.people >=100 and s3.people >=100 and (
+(s1.id=s2.id-1 and s1.id=s3.id-2 )#123
+ or
+(s1.id=s2.id+1 and s1.id=s3.id-1 )#213
+ or
+(s1.id=s2.id+1 and s1.id=s3.id+2 )#321
+ )
+ Order by s1.id asc
+;
+#True
+
+leetcode_title:"Not Boring Movies"
+
+# Write your MySQL query statement below
+
+Select * from cinema c
+where id %2=1 and description != 'boring'
+order by rating desc;
+#True
+
+leetcode_title:"Exchange Seats"
+
+# 1st Write your MySQL query statement below
+
+Select s1.id,case
+when s1.id%2 =1 and id<(select count(student) from seat) then (Select student from seat where seat.id=s1.id +1),
+when s1.id%2 =0 then (select student from seat where seat.id=s1.id -1),
+else s1.student 
+End
+as student
+from seat s1;
+#False
+
+#2nd Write your MySQL query statement below
+
+Select s1.id,case
+when s1.id%2 =1 and id<(select count(student) from seat) then (Select student from seat where seat.id=s1.id +1)
+when s1.id%2 =0 then (select student from seat where seat.id=s1.id -1)
+else s1.student 
+End
+as student
+from seat s1;
+#True
