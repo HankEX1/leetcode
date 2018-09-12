@@ -1,0 +1,38 @@
+leetcode_title:"Combine Two Tables"
+
+# Write your MySQL query statement below
+
+Select FirstName,LastName,City,State from Person p
+Left join Address a
+on p.Personid=a.Personid;
+#true
+
+leetcode_title:"Second Highest Salary"
+
+# Write your MySQL query statement below
+
+Select IFNULL((Select Salary from Employee Order by Salary limit 1 offset 1),null) as SecondHighestSalary;
+#False
+Select IFNULL((Select distinct Salary from Employee Order by Salary desc limit 1 offset 1),null) as SecondHighestSalary;
+#True
+
+leetcode_title:"Nth Highest Salary"
+
+CREATE FUNCTION getNthHighestSalary(N INT) RETURNS INT
+BEGIN
+  RETURN (
+      # Write your MySQL query statement below.
+      Select Salary from (Select distinct Salary from Employee) e1
+      where (Select count(e2.Salary) from (Select distinct Salary from Employee) e2 where e2.salary>=e1.salary)   =n
+      
+  );
+END
+#True
+
+leetcode_title:"Rank Scores"
+
+# Write your MySQL query statement below
+
+Select Score,(Select count(distinct s1.score) from Scores s1 where s1.score>=Scores.score) Rank from Scores
+Order by Score desc;
+#True
