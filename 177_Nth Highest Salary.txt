@@ -1,0 +1,25 @@
+Write a SQL query to get the nth highest salary from the Employee table.
+
++----+--------+
+| Id | Salary |
++----+--------+
+| 1  | 100    |
+| 2  | 200    |
+| 3  | 300    |
++----+--------+
+For example, given the above Employee table, the nth highest salary where n = 2 is 200. If there is no nth highest salary, then the query should return null.
+
++------------------------+
+| getNthHighestSalary(2) |
++------------------------+
+| 200                    |
++------------------------+
+
+#Hank_Remark:要求第n高數據，同時要可以回傳null,where以n為條件去思考，則使用count較為妥善，根據題目，我們可以知道要回傳Salary數據，於是Select Salary from Employee為主架構，Where n=條件
+CREATE FUNCTION getNthHighestSalary(N INT) RETURNS INT
+BEGIN
+  RETURN (
+      # Count
+      Select distinct Salary from Employee Where (Select count(Distinct e.Salary) from Employee e where e.Salary >=Employee.Salary) = n
+  );
+END

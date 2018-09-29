@@ -1,0 +1,35 @@
+Table: Person
+
++-------------+---------+
+| Column Name | Type    |
++-------------+---------+
+| PersonId    | int     |
+| FirstName   | varchar |
+| LastName    | varchar |
++-------------+---------+
+PersonId is the primary key column for this table.
+Table: Address
+
++-------------+---------+
+| Column Name | Type    |
++-------------+---------+
+| AddressId   | int     |
+| PersonId    | int     |
+| City        | varchar |
+| State       | varchar |
++-------------+---------+
+AddressId is the primary key column for this table.
+ 
+
+Write a SQL query for a report that provides the following information for each person in the Person table, regardless if there is an address for each of those people:
+
+FirstName, LastName, City, State
+
+Hank_remark:依照題目要求，要求顯示Person表的所有資訊，結合兩張表，使用Left Join為主，或者Right Join，只是需要注意主表'Person'的位置，以下展示兩種Join解決方案，此處無法使用 Join，避免Person表內
+沒有Address的資訊，也是同樣道理，無法使用Where用法。
+# Left Join
+Select FirstName, LastName, City, State from Person p
+Left Join Address a On p.PersonId=a.PersonId; 
+# Right Join
+Select FirstName, LastName, City, State from Address a
+Right Join Person p On p.PersonId=a.PersonId; 

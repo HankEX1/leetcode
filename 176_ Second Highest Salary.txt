@@ -1,0 +1,23 @@
+Write a SQL query to get the second highest salary from the Employee table.
+
++----+--------+
+| Id | Salary |
++----+--------+
+| 1  | 100    |
+| 2  | 200    |
+| 3  | 300    |
++----+--------+
+For example, given the above Employee table, the query should return 200 as the second highest salary. If there is no second highest salary, then the query should return null.
+
++---------------------+
+| SecondHighestSalary |
++---------------------+
+| 200                 |
++---------------------+
+
+#Hank_remark:求表中第二高的薪資，需要考慮null的回傳，在此處可以使用ifnull(x,y);若x=null則回傳y，x!=null則回傳x，Order排序後，選擇第二筆數據，limit 1,1 or limit 1 offset 1;
+第二種思維，因為指定第二高，可以利用第一高的數據，Max來處理此要求，請參考以下解決方案;
+# Ifnull
+Select Ifnull((Select distinct Salary from employee order by salary desc limit 1,1),null) as SecondHighestSalary;
+# Max
+Select Max(Salary) 'SecondHighestSalary' From Employee where Salary <(Select Max(Salary) from employee); 
