@@ -1,0 +1,31 @@
+The Employee table holds all employees. Every employee has an Id, a salary, and there is also a column for the department Id.
+
++----+-------+--------+--------------+
+| Id | Name  | Salary | DepartmentId |
++----+-------+--------+--------------+
+| 1  | Joe   | 70000  | 1            |
+| 2  | Henry | 80000  | 2            |
+| 3  | Sam   | 60000  | 2            |
+| 4  | Max   | 90000  | 1            |
++----+-------+--------+--------------+
+The Department table holds all departments of the company.
+
++----+----------+
+| Id | Name     |
++----+----------+
+| 1  | IT       |
+| 2  | Sales    |
++----+----------+
+Write a SQL query to find employees who have the highest salary in each of the departments. For the above tables, Max has the highest salary in the IT department and Henry has the highest salary in the Sales department.
+
++------------+----------+--------+
+| Department | Employee | Salary |
++------------+----------+--------+
+| IT         | Max      | 90000  |
+| Sales      | Henry    | 80000  |
++------------+----------+--------+
+
+#Hank_Remark:Max為主要思維，但要區分部門，在SQL語法中，Group by & Max 會有問題，Group by會抓取第一筆數據，所以在這邊用Where (Group by旗標,Max數值)in( 去將我們想要的結果回傳回來;
+#Max/Where In/Group by
+Select d.Name as 'Department',e.Name as 'Employee',e.Salary from Employee e,Department d
+Where e.DepartmentId=d.Id and (e.DepartmentId,e.Salary) in (Select e1.DepartmentId,Max(e1.Salary) from employee e1 group by e1.DepartmentId);
